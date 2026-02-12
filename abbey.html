@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>The Abbey Wall — The Circus of Extraordinary Things</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Crimson+Text:ital,wght@0,400;0,600;1,400&family=IM+Fell+English+SC&family=IM+Fell+English:ital@0;1&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0a0806;
+  --bg-card: rgba(14, 11, 8, 0.92);
+  --text: #d4c5a9;
+  --text-dim: #8a7e6a;
+  --text-bright: #f0e6d0;
+  --accent: #c9953c;
+  --accent-glow: #e8b84a;
+  --accent-dim: #8a6a2a;
+  --border: rgba(201, 149, 60, 0.25);
+}
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { font-size: 16px; scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+body {
+  font-family: 'Crimson Text', Georgia, serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh; min-height: 100dvh;
+  overflow-x: hidden;
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 1.25rem;
+}
+.vignette {
+  position: fixed; inset: 0;
+  background: radial-gradient(ellipse at center, transparent 30%, rgba(0,0,0,0.65) 100%);
+  pointer-events: none; z-index: 1;
+}
+.grain {
+  position: fixed; inset: 0;
+  opacity: 0.035;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  pointer-events: none; z-index: 2;
+}
+.abbey-content {
+  position: relative;
+  z-index: 10;
+  max-width: 600px;
+  width: 100%;
+  text-align: center;
+}
+.ornament {
+  text-align: center;
+  color: var(--accent-dim);
+  font-size: 1.2rem;
+  letter-spacing: 0.5em;
+  margin-bottom: 2rem;
+  opacity: 0;
+  animation: fadeUp 0.6s ease forwards 0.3s;
+}
+.abbey-title {
+  font-family: 'Cinzel', serif;
+  font-weight: 400;
+  font-size: clamp(1.4rem, 5vw, 2.2rem);
+  color: var(--accent);
+  text-align: center;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  margin-bottom: 0.5rem;
+  opacity: 0;
+  animation: fadeUp 1s ease forwards 0.5s;
+}
+.abbey-subtitle {
+  font-family: 'IM Fell English', serif;
+  font-style: italic;
+  font-size: clamp(0.85rem, 2.5vw, 1rem);
+  color: var(--text-dim);
+  text-align: center;
+  letter-spacing: 0.08em;
+  margin-bottom: 2.5rem;
+  opacity: 0;
+  animation: fadeUp 1s ease forwards 0.8s;
+}
+.abbey-prose {
+  max-width: 540px;
+  width: 100%;
+  margin: 0 auto 2rem;
+  font-size: clamp(1rem, 2.8vw, 1.15rem);
+  line-height: 1.85;
+  color: var(--text);
+  text-align: center;
+}
+.abbey-prose p {
+  margin-bottom: 1.25rem;
+  opacity: 0;
+  animation: fadeUp 0.8s ease forwards;
+}
+.abbey-prose p:nth-child(1) { animation-delay: 1.2s; }
+.abbey-prose p:nth-child(2) { animation-delay: 1.6s; }
+.abbey-prose p:nth-child(3) { animation-delay: 2.0s; }
+.abbey-prose p:nth-child(4) { animation-delay: 2.4s; }
+.abbey-prose p:nth-child(5) { animation-delay: 2.8s; }
+.abbey-signoff {
+  font-family: 'IM Fell English', serif;
+  font-style: italic;
+  font-size: clamp(0.9rem, 2.5vw, 1.05rem);
+  color: var(--accent);
+  text-align: center;
+  letter-spacing: 0.06em;
+  margin-top: 1rem;
+  opacity: 0;
+  animation: fadeUp 1s ease forwards 3.2s;
+}
+.abbey-signoff em {
+  display: block;
+  margin-top: 0.5rem;
+  color: var(--text-dim);
+  font-size: 0.85rem;
+}
+.ornament-bottom {
+  text-align: center;
+  color: var(--accent-dim);
+  font-size: 1.2rem;
+  letter-spacing: 0.5em;
+  margin-top: 2.5rem;
+  opacity: 0;
+  animation: fadeUp 0.6s ease forwards 3.8s;
+}
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+/* Particle canvas */
+#particles {
+  position: fixed; inset: 0;
+  pointer-events: none; z-index: 1;
+}
+</style>
+</head>
+<body>
+<div class="vignette"></div>
+<div class="grain"></div>
+<canvas id="particles"></canvas>
+
+<div class="abbey-content">
+  <div class="ornament">&middot; &middot; &#10022; &middot; &middot;</div>
+  <h1 class="abbey-title">The Abbey Wall</h1>
+  <p class="abbey-subtitle">A record of those who walked through, and what the circus remembers.</p>
+
+  <div class="abbey-prose">
+    <p>The tent is quieter now. The candles are burning low, the organ has stopped, and the fortune teller has closed her eyes &mdash; though whether she&rsquo;s sleeping or simply done with you is anyone&rsquo;s guess.</p>
+    <p>Your creature is yours. Your title is earned. The things you found inside these rooms &mdash; the choices you made, the stories you told, the objects that chose you back &mdash; those are written now, in ink the circus doesn&rsquo;t let fade.</p>
+    <p>This was always for you. All of it. Every room, every thread of music, every impossible thing on every impossible shelf. Built by two people who wanted to give you something worth remembering on a night worth celebrating.</p>
+    <p>Now go. The celebrations are waiting on Discord, the drinks are poured, and if you don&rsquo;t show up soon, someone will send the raccoon apothecary after you.</p>
+    <p>And trust us &mdash; it has <em>opinions.</em></p>
+  </div>
+
+  <div class="abbey-signoff">
+    With love, mischief, and an unreasonable amount of code &mdash;
+    <em>Kay &amp; Dax</em>
+  </div>
+
+  <div class="ornament-bottom">&middot; &middot; &#10022; &middot; &middot;</div>
+</div>
+
+<script>
+/* Particles — same as main page */
+const canvas = document.getElementById('particles');
+const ctx = canvas.getContext('2d');
+let particles = [];
+
+function resizeCanvas() {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+}
+
+function createParticles() {
+  particles = [];
+  const count = Math.min(40, Math.floor(window.innerWidth / 25));
+  for (let i = 0; i < count; i++) {
+    particles.push({
+      x: Math.random() * canvas.width,
+      y: Math.random() * canvas.height,
+      size: Math.random() * 1.5 + 0.3,
+      vy: -(Math.random() * 0.15 + 0.05),
+      vx: (Math.random() - 0.5) * 0.1,
+      alpha: Math.random() * 0.3 + 0.05,
+      pulse: Math.random() * Math.PI * 2
+    });
+  }
+}
+
+function drawParticles() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  particles.forEach(p => {
+    p.y += p.vy; p.x += p.vx; p.pulse += 0.01;
+    const a = p.alpha * (0.7 + Math.sin(p.pulse) * 0.3);
+    if (p.y < -10) { p.y = canvas.height + 10; p.x = Math.random() * canvas.width; }
+    if (p.x < -10) p.x = canvas.width + 10;
+    if (p.x > canvas.width + 10) p.x = -10;
+    ctx.beginPath();
+    ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+    ctx.fillStyle = `rgba(201,149,60,${a})`;
+    ctx.fill();
+  });
+  requestAnimationFrame(drawParticles);
+}
+
+window.addEventListener('resize', () => { resizeCanvas(); createParticles(); });
+resizeCanvas(); createParticles(); drawParticles();
+</script>
+</body>
+</html>
